@@ -1,7 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import {useEffect} from 'react';
+import {translate, translateMulti} from './services/translateService';
 
 function App() {
+
+  const API_URL = "https://libretranslate.com/translate";
+
   return (
     <div className="App">
       <header className="App-header">
