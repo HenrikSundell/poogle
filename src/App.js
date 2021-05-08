@@ -1,28 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
-import {useEffect} from 'react';
-import {translate, translateMulti} from './services/translateService';
+import "./App.css";
+import { useState } from "react";
+import { translateMulti } from "./services/translateService";
 
 function App() {
+  const [searchBoxText, setSearchBoxText] = useState("");
 
-  const API_URL = "https://libretranslate.com/translate";
+  const searchBoxChange = (ev) => {
+    setSearchBoxText(ev.currentTarget.value);
+  };
+
+  const search = (ev) => {
+    (async () => {
+      const text = await translateMulti(searchBoxText);
+      console.log(text);
+    })();
+  };
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input
+        type="text"
+        value={searchBoxText}
+        onChange={searchBoxChange}
+      ></input>
+      <button onClick={search}>Search</button>
     </div>
   );
 }
