@@ -5,6 +5,7 @@ import { translateMulti } from "./services/translateService";
 function App() {
   const [searchBoxText, setSearchBoxText] = useState("");
 
+  const [currentSearch, setCurrentSearch] = useState("");
   const searchBoxChange = (ev) => {
     setSearchBoxText(ev.currentTarget.value);
   };
@@ -12,7 +13,8 @@ function App() {
   const search = (ev) => {
     (async () => {
       const text = await translateMulti(searchBoxText);
-      window.location.href = `http://www.google.com/search?q=${text}`;
+      setCurrentSearch(text);
+      //window.location.href = `http://www.google.com/search?q=${text}`;
       console.log(text);
     })();
   };
@@ -25,6 +27,7 @@ function App() {
         onChange={searchBoxChange}
       ></input>
       <button onClick={search}>Search</button>
+      {currentSearch && <iframe src={`https://www.google.com/search?q=${currentSearch}&igu=1`} width="100%" height="100%" title="search" frameborder="0"></iframe>}
     </div>
   );
 }
