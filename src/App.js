@@ -12,6 +12,7 @@ function App() {
   const search = (ev) => {
     (async () => {
       const text = await translateMulti(searchBoxText);
+      window.location.href = `http://www.google.com/search?q=${text}`;
       console.log(text);
     })();
   };
